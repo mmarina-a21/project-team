@@ -1,0 +1,87 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #F0F0F0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#logo-container {
+    flex-grow: 1;
+}
+
+#logo {
+    width: 150px; /* Adjust size as needed */
+}
+
+#main-nav {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+}
+
+#main-nav ul {
+    list-style: none;
+    display: flex;
+}
+
+#main-nav ul li {
+    margin-right: 20px;
+}
+
+#main-nav ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+#user-options {
+    display: flex;
+    align-items: center;
+}
+
+#user-options input[type="search"] {
+    margin-left: 10px;
+}
+main {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+}
+
+#forum-section {
+    flex-grow: 2;
+    margin-right: 20px;
+}
+
+#new-post {
+    display: block;
+    margin-bottom: 20px;
+}
+
+#threads div {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#games-section {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8em;
+    background-color: #F0F0F0;
+}

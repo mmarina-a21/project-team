@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in / Sign up - Yapatron</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/logo.ico">
+</head>
+<body class="auth-body">
+    <div class="modal-content">
+        <div class="auth-form" id="login-form">
+            <span class="close" onclick="window.history.back()">&times;</span>
+            <h2>Login</h2>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" onclick="login()">Login</button>
+            <p class="switch-form">Not registered? <a href="#" onclick="switchForm('signup')">Create an account</a></p>
+        </div>
+        <div class="auth-form" id="signup-form" style="display:none;">
+            <span class="close" onclick="window.history.back()">&times;</span>
+            <h2>Signup</h2>
+            <input type="text" placeholder="Username" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit" onclick="signup()">Signup</button>
+            <p class="switch-form">Already registered? <a href="#" onclick="switchForm('login')">Sign in</a></p>
+        </div>
+    </div>
+
+    <script src="authenticator_script.js"></script>
+</body>
+</html>

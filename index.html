@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yapatron</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="Images/logo.ico">
 </head>
 <body>
     <header>
         <div id="logo-container">
             <a href="index.html">
-                <img src="Team Project images\WhatsApp Image 2024-03-29 at 17.17.51_2d21c80d.jpg" alt="Yapatron Logo" id="logo">
+                <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
             </a>
         </div>
         <nav id="main-nav">
@@ -21,11 +22,17 @@
                 <li><a href="communities.html">Communities</a></li>
             </ul>
             <div id="user-options">
-                <a href="login.html">Login/Register</a>
+                <a href="login.html">Log in / Sign up</a>
                 <input type="search" placeholder="Search">
             </div>
         </nav>
-    </header> 
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>        
+    </header>
 
     <main>
         <section id="forum-section">
@@ -52,5 +59,20 @@
     <footer>
         <p>© 2024 Yapatron. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          const nightModeCheckbox = document.getElementById('checkbox');
+          const nightModeState = localStorage.getItem('nightMode') === 'true';
+          nightModeCheckbox.checked = nightModeState; // Set the initial state of the checkbox
+          if (nightModeState) {
+            document.body.classList.add('night-mode');
+          }
+      
+          nightModeCheckbox.addEventListener('change', function() {
+            document.body.classList.toggle('night-mode');
+            localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
+          });
+        });
+      </script>
 </body>
 </html>

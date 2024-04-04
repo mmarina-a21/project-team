@@ -20,18 +20,19 @@
                 <li><a href="index.html">Forums</a></li>
                 <li><a href="media.html">Media</a></li>
                 <li><a href="communities.html">Communities</a></li>
+                <li><a href="authenticator.html">Log in / Sign up</a></li>
+                <li>
+                    <label for="search" class="visually-hidden">Search</label>
+                    <input type="search" id="search" placeholder="Search">
+                </li> 
             </ul>
-            <div id="user-options">
-                <a href="login.html">Log in / Sign up</a>
-                <input type="search" placeholder="Search">
-            </div>
         </nav>
         <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
+            <label class="theme-switch">
+                <input type="checkbox" class="night-mode-switch" />
                 <div class="slider round"></div>
             </label>
-        </div>        
+          </div>                 
     </header>
 
     <main>
@@ -59,20 +60,6 @@
     <footer>
         <p>© 2024 Yapatron. All rights reserved.</p>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-          const nightModeCheckbox = document.getElementById('checkbox');
-          const nightModeState = localStorage.getItem('nightMode') === 'true';
-          nightModeCheckbox.checked = nightModeState; // Set the initial state of the checkbox
-          if (nightModeState) {
-            document.body.classList.add('night-mode');
-          }
-      
-          nightModeCheckbox.addEventListener('change', function() {
-            document.body.classList.toggle('night-mode');
-            localStorage.setItem('nightMode', document.body.classList.contains('night-mode'));
-          });
-        });
-      </script>
+    <script src="nightmode.js"></script>
 </body>
 </html>

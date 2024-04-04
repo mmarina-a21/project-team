@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile Page</title>
+  <link rel="stylesheet" href="style.css"> <!-- Assuming you have a style.css file -->
+</head>
+<body>
+  <header>
+    <!-- Navigation goes here -->
+  </header>
+  <main>
+    <div class="profile-container">
+      <h1>Profile</h1>
+      <div class="profile-picture-container">
+        <img src="path_to_default_profile_picture.jpg" alt="Profile Picture" id="profile-picture">
+        <button onclick="document.getElementById('profile-picture-input').click()">Change Picture</button>
+        <input type="file" id="profile-picture-input" style="display: none;" onchange="loadProfilePicture(event)">
+      </div>
+      <div class="profile-details">
+        <p><strong>Username:</strong> <span id="profile-username">YourUsername</span></p>
+        <p><strong>Email:</strong> <span id="profile-email">youremail@example.com</span></p>
+        <!-- More profile details here -->
+      </div>
+      <!-- Add form for updating profile details if needed -->
+    </div>
+  </main>
+  <footer>
+    <!-- Footer goes here -->
+  </footer>
+
+  <script src="profile.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>

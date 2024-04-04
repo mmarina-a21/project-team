@@ -2,12 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <title>Log in / Sign up - Yapatron</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="Images/logo.ico">
 </head>
 <body class="auth-body">
+    <div id="theme-switch-wrapper-login" class="theme-switch-wrapper">
+        <label class="theme-switch">
+            <input type="checkbox" class="night-mode-switch" />
+            <div class="slider round"></div>
+        </label>
+    </div>
     <div class="modal-content">
         <div class="auth-form" id="login-form">
             <span class="close" onclick="window.history.back()">&times;</span>
@@ -29,5 +35,6 @@
     </div>
 
     <script src="authenticator_script.js"></script>
+    <script src="nightmode.js"></script>
 </body>
 </html>

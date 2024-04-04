@@ -1,4 +1,4 @@
-  function switchForm(form) {
+function switchForm(form) {
     if (form === 'signup') {
         document.getElementById('login-form').style.display = 'none';
         document.getElementById('signup-form').style.display = 'block';

@@ -10,31 +10,29 @@
 </head>
 <body>
     <header>
-        <div id="logo-container">
-            <a href="index.html">
-                <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
-            </a>
-        </div>
         <nav id="main-nav">
             <ul>
+                <div id="logo-container">
+                    <a href="index.html">
+                        <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
+                    </a>
+                </div>
                 <li><a href="index.html">Forums</a></li>
                 <li><a href="profile.html">Profile</a></li>
                 <li><a href="communities.html">Communities</a></li>
                 <li><a href="authenticator.html">Log in / Sign up</a></li>
                 <li>
-                    <label for="search" class="visually-hidden">Search</label>
                     <input type="search" id="search" placeholder="Search">
                 </li> 
+                <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
+                    <label class="theme-switch">
+                        <input type="checkbox" class="night-mode-switch" />
+                        <div class="slider round"></div>
+                    </label>
+                  </div>
             </ul>
-        </nav>
-        <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
-            <label class="theme-switch">
-                <input type="checkbox" class="night-mode-switch" />
-                <div class="slider round"></div>
-            </label>
-          </div>                 
+        </nav>          
     </header>
-
     <main>
         <section id="forum-section">
             <button id="new-post">New Post</button>

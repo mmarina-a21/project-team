@@ -1,139 +1,81 @@
+/* Global styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #FFFFFF; /* Default light background */
     color: #000000; /* Default text color for light mode */
+    display: flex; /* New: Organize the content in a flex container */
+    flex-direction: column;
+    height: 100vh; /* New: Make the body take up full viewport height */
 }
 
 header {
     background-color: #F0F0F0;
     padding: 10px;
     display: flex;
-    justify-content: space-between; /* Aligns children to the space between */
-    align-items: center; /* Vertically centers children */
-    #logo-container img {
-        max-width: 100px; /* Limits the size of the logo */
-        height: auto; /* Maintains aspect ratio */
-    }
-    
-    /* Ensure the logo-container does not stretch */
-    #logo-container {
-        flex: 0 1 auto; /* Do not grow, but allow shrinking, and base size on content */
-    }
-    
+    justify-content: center;
+    align-items: center;
+}
+
+#logo-container img {
+    max-width: 100px;
+    height: auto;
 }
 
 #main-nav {
+    width: 100%;
     display: flex;
-    justify-content: center; /* Centers navigation menu */
     align-items: center;
-    flex: 2; /* Gives the navigation twice as much space as logo/search */
-    margin: 0 auto; /* Centers the navigation menu */
+    justify-content: center;
 }
 
 #main-nav ul {
     list-style: none;
     display: flex;
+    justify-content: space-around; /* Changed to space-around to distribute items */
+    align-items: center;
     padding: 0;
-    gap: 20px; /* Adds space between menu items */
-    align-items: center; /* Vertically align menu items */
-    justify-content: center; /* Centers the menu items */
+    margin: 0;
+    width: 100%;
 }
 
-#main-nav ul li a {
+#main-nav ul li a, .theme-switch-wrapper {
     text-decoration: none;
     color: #333;
     padding: 8px 16px;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
+    display: block;
 }
 
 #main-nav ul li a:hover {
-    background-color: #007bff; /* Blue background on hover */
-    color: white; /* White text on hover */
+    background-color: #007bff;
+    color: white;
 }
 
-/* style.css */
-/* ... existing styles ... */
-
-/* Visually hides the label but keeps it accessible for screen readers */
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* Styles for the search bar */
 input[type="search"] {
-    padding: 10px 15px; /* Increase padding for larger touch area */
-    border: 2px solid #007bff; /* Blue border */
-    border-radius: 20px; /* Rounded borders for a modern look */
-    font-size: 1rem; /* Increased font size for better readability */
-    outline: none; /* Remove the default focus outline */
-    transition: border-color 0.2s; /* Smooth transition for border color */
-    width: 100%; /* Full width to fill its container */
-    max-width: 300px; /* Maximum width so it doesn't get too large */
-    box-sizing: border-box; /* Include padding and border in the element's width */
+    padding: 10px 15px;
+    border: 2px solid #007bff;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+    background: url('') no-repeat, linear-gradient(to bottom, #fff, #f9f9f9); 
 }
 
 input[type="search"]:focus {
-    border-color: #0056b3; /* Darker blue when the element is focused */
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Glow effect on focus */
+    border-color: #0056b3;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
 }
 
-/* Responsive adjustments for the search bar */
-@media (max-width: 768px) {
-    input[type="search"] {
-        max-width: 100%; /* Full width on smaller screens */
-    }
-}
-
-#theme-switch-wrapper-login {
-    position: fixed;
-    top: 30px;
-    right: 10px;
-    z-index: 100; /* Ensures it stays on top of other elements */
-}
-
-#main-nav {
-    gap: 10px; /* Space between menu items */
-}
-
-/* Additional responsive adjustments */
-
+/* Structure */
 main {
     flex: 1;
     display: flex;
+    flex-direction: column;
     padding: 20px;
-}
-
-#forum-section {
-    flex-grow: 2;
-    margin-right: 20px;
-}
-
-#new-post {
-    display: block;
-    margin-bottom: 20px;
-}
-
-#threads div {
-    border: 1px solid #ccc;
-    margin-bottom: 20px;
-    padding: 10px;
-}
-
-#games-section {
-    flex-grow: 1;
-    border: 1px solid #ccc;
-    padding: 10px;
 }
 
 footer {
@@ -141,12 +83,43 @@ footer {
     padding: 10px;
     font-size: 0.8em;
     background-color: #F0F0F0;
+    display: block; /* Changed from none to block to make it visible */
+}
+
+/* Modal content */
+.modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+/* Buttons */
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
 
 /* Night mode styles */
 body.night-mode {
     background-color: #2c3e50;
-    color: #ecf0f1;
+    color: #dbdbdb;
 }
 
 body.night-mode header {
@@ -154,47 +127,29 @@ body.night-mode header {
 }
 
 body.night-mode footer {
-    background-color: #2c3e50;
-}
-
-body.night-mode a {
-    color: #ecdbba;
-}
-
-body.night-mode #main-nav ul li a {
-    color: #ecdbba;
-}
-
-body.night-mode #new-post,
-body.night-mode #threads div {
-    background-color: #3b4c64;
-    border-color: #3b4c64;
-}
-
-body.night-mode input[type="search"],
-body.night-mode input[type="text"],
-body.night-mode input[type="email"],
-body.night-mode input[type="password"],
-body.night-mode button {
     background-color: #34495e;
-    color: #ecf0f1;
-    border: 1px solid #ecf0f1;
+}
+
+body.night-mode a, body.night-mode .theme-switch-wrapper, body.night-mode #search {
+    color: #ecdbba;
+}
+
+body.night-mode .modal-content {
+    background-color: #2a2f45;
+    color: #c5c6c7;
 }
 
 body.night-mode button {
-    background-color: #3b4c64;
-    color: #ecf0f1;
+    background-color: #0056b3;
 }
 
-body.night-mode label {
-    color: #ecf0f1;
+/* Theme switch */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-body.night-mode #main-nav ul li:hover {
-    background-color: #3b4c64; /* Dark mode hover background for nav items */
-}
-
-/* The switch - the box around the slider */
 .theme-switch {
     position: relative;
     display: inline-block;
@@ -202,14 +157,12 @@ body.night-mode #main-nav ul li:hover {
     height: 34px;
 }
 
-/* Hide default HTML checkbox */
 .theme-switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
 
-/* The slider */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -236,7 +189,6 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
@@ -245,164 +197,150 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-body.night-mode .theme-switch-wrapper label .slider {
+body.night-mode .theme-switch .slider {
     background-color: #3b4c64;
 }
 
-body.night-mode #user-options input[type="search"]:focus {
-    box-shadow: 0 0 0 2px #2980b9;
-}
-
-/* Assuming your <header> has a class or id, e.g., .top-header */
-.top-header {
-    position: relative; /* If you want the switch relative to the header */
-    z-index: 10; /* Make sure the header is above other content */
-}
-
-/* Authentication form styles */
-.auth-form{
-    background: #fff;
+/*Auth body for authenticator's forms */
+.auth-form {
+    display: flex; /* Align children with flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    justify-content: center; /* Center children vertically */
+    width: 100%; /* Full width of its container */
     padding: 20px;
-    border-radius: 5px;
-    width: 100%;
-    max-width: 500px; /* Wider form */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: auto; /* Centers the modal in the flex container */
-    position: relative; /* Relative positioning */
-    z-index: 1001; /* Above the overlay */
+    box-sizing: border-box; /* Padding included in the width */
 }
 
-/* Modal body */
-.auth-body {
-    background: rgba(0, 0, 0, 0.5); /* Simulate a modal background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    position: fixed; /* Fixed position */
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Under the modal content */
-}
-
-/* Enhanced form styles for better appearance */
+/* Update input and button styles for a more polished look */
 .auth-form input[type="email"],
 .auth-form input[type="password"],
 .auth-form input[type="text"] {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 100%; /* Full width textboxes */
-    box-sizing: border-box; /* Include padding and border in the element's width */
+    width: 100%; /* Make input take the full width of its parent */
+    max-width: 300px; /* Maximum width of input fields */
+    margin: 10px 0; /* Spacing between form items */
+    padding: 12px 20px; /* Larger padding for better appearance */
+    border: 1px solid #ccc; /* Subtle border color */
+    border-radius: 4px; /* Slightly rounded borders */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow for depth */
+    font-size: 1rem; /* Set font size */
+    box-sizing: border-box; /* Include padding and border in the width */
 }
 
 .auth-form button {
-    cursor: pointer;
-    padding: 10px 0; /* More padding */
-    background-color: #007bff; /* Blue shade button */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px; /* Spacing above the button */
-    width: 100%; /* Full width button */
+    width: 100%; /* Make button take the full width of its parent */
+    max-width: 300px; /* Maximum width of the button */
+    margin: 10px 0; /* Spacing between form items */
+    padding: 12px 20px; /* Larger padding for better appearance */
+    border-radius: 4px; /* Match the input fields' border radius */
+    font-size: 1rem; /* Match the input fields' font size */
 }
 
-/* Centering the button below the textboxes */
-.auth-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Color adjustments for the form elements */
+/* Ensure the text of labels, inputs and buttons is centered */
+.auth-form h2,
 .auth-form input,
-.auth-form button {
-    color: #fff; /* Whiter text */
-    background-color: #2c3e50; /* Dark background for the inputs and button */
-    border: none; /* Remove borders */
+.auth-form button,
+.auth-form p {
+    text-align: center;
 }
 
-/* Placeholder color */
-.auth-form input::placeholder {
-    color: #bbb; /* Light grey placeholder text */
+/* Responsive adjustments */
+@media (max-width: 400px) {
+    .auth-form input[type="email"],
+    .auth-form input[type="password"],
+    .auth-form input[type="text"],
+    .auth-form button {
+        max-width: none; /* Inputs and button should take the full width on smaller screens */
+    }
 }
 
-/* Close button adjustments */
-.close {
-    float: right;
-    cursor: pointer;
-    color: #aaa; /* Make the close button a bit lighter */
-    font-size: 1.5em; /* Increase the size */
+/* Initial display setup for forms */
+#login-form {
+    display: flex; /* Show the login form initially */
 }
 
-/* Adjusting night mode styles for the authentication form */
-body.night-mode .auth-form {
-    background-color: #2a2f45; /* Darker background for night mode */
-    color: #c5c6c7; /* Lighter text for better readability */
+#signup-form {
+    display: none; /* Hide the signup form initially */
 }
 
-body.night-mode .auth-form input[type="email"],
-body.night-mode .auth-form input[type="password"],
-body.night-mode .auth-form input[type="text"] {
-    background: #1e2130; /* Darker input fields */
-    color: #c5c6c7; /* Light text color */
-    border-color: #3e4152; /* Matching border color */
-}
-
-body.night-mode .auth-form button {
-    background-color: #0056b3; /* Adjusting button color for night mode */
-}
-
-body.night-mode .switch-form a {
-    color: #4d90fe; /* Lighter blue for links in night mode */
-}
-
-
-
+/* Profile Page Styles */
 .profile-container {
-    background-color: white;
-    margin: 20px auto;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-  }
-  
-  .profile-picture-container {
-    margin-bottom: 20px;
-  }
-  
-  .profile-picture-container img {
-    width: 150px;
+    max-width: 800px; /* Set a max-width for the profile container */
+    margin: 2rem auto; /* Center the profile container */
+    padding: 1rem;
+    background-color: #f9f9f9; /* A light grey background */
+    border-radius: 10px; /* Rounded corners for the container */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center; /* Center the text */
+}
+
+h1 {
+    color: #333; /* Dark grey color for the heading */
+    margin-bottom: 1.5rem; /* Space below the heading */
+}
+
+.profile-picture-container {
+    margin-bottom: 1rem; /* Space below the picture container */
+}
+
+#profile-picture {
+    width: 200px; /* Fixed width for the profile picture */
+    height: 200px; /* Fixed height for the profile picture */
+    border-radius: 50%; /* Circular profile pictures */
+    object-fit: cover; /* Cover fit for images */
+    border: 3px solid #007bff; /* Border to make the picture stand out */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow around the picture */
+}
+
+.profile-details {
+    text-align: left; /* Left-align the text in profile details */
+    margin-top: 1rem; /* Space above profile details */
+}
+
+.profile-details p {
+    margin: 0.5rem 0; /* Vertical spacing between details */
+    padding: 0 1rem; /* Padding on the sides */
+}
+
+/* Apply a responsive grid layout on larger screens */
+@media (min-width: 768px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center align items */
+        padding: 2rem;
+      }
+      
+      .profile-picture-container {
+        position: relative;
+        margin-bottom: 2rem;
+      }      
+
+      .profile-details {
+        background: #f2f2f2; /* Light background for the details area */
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        width: 100%; /* Full width or adjust as needed */
+        max-width: 400px; /* Maximum width for larger screens */
+        box-sizing: border-box;
+      }
+}
+
+#profile-picture {
+    width: 150px; /* Set your desired size */
     height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #333;
+    border-radius: 50%; /* Circular photo */
+    object-fit: cover; /* Ensure the image covers the area */
+    border: 3px solid #007bff; /* Border color can change in night mode if needed */
+}
+
+/* Night Mode Adjustments */
+body.night-mode .profile-details {
+    background: #34495e;
+    color: #ecf0f1; /* Adjust text color for better visibility */
   }
   
-  .profile-details {
-    text-align: left;
-    margin-top: 20px;
-  }
-  
-  .profile-details p {
-    margin: 10px 0;
-  }
-  
-  button {
-    background-color: #5cb85c;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    padding: 10px 20px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: #449d44;
-  }
+  body.night-mode #profile-picture {
+    border-color: #ecf0f1;
+}

@@ -1,0 +1,60 @@
+import random
+
+# Quiz questions, options, and answers
+questions = [
+    {'question': 'What is the largest continent, by land mass?',
+     'options': ['Asia', 'North America', 'South America', 'Africa'],
+     'correct_answer': 'Asia'},
+    {'question': 'What type of tree is pictured on the Lebanese flag?',
+     'options': ['Common Fig Tree', 'Green Cedar Tree', 'Weeping Fig', 'Red Frangipani'],
+     'correct_answer': 'Green Cedar Tree'},
+    {'question': 'In what year did the Ottoman Empire officially end??',
+     'options': ['1874', '1922', '1940', '1957'],
+     'correct_answer': '1922'},
+    {'question': 'At which Olympics did women’s boxing make its official Olympic debut?',
+     'options': ['Los Angeles 1984', 'Sydney 2000', 'Innsbruck 1976', 'London 2012'],
+     'correct_answer': 'London 2012'},
+    {'question': 'In Celsius, what is the melting point of gold?',
+     'options': ['100 °C', '544 °C', '901 °C', '1,064 °C'],
+     'correct_answer': '1,064 °C'},
+    {'question': 'Which former US government employee became a pioneer of the LGBTQ+ rights movement after being fired for being openly gay and which year was he fired?',
+     'options': ['Admiral George Dewey, 1980', 'Astronomer Frank Kameny, 1957', 'Diplomat Allen Dulles, 1969', 'Congressman George White, 2001'],
+     'correct_answer': 'Astronomer Frank Kameny, 1957'},
+    {'question': 'What year were women allowed to open bank accounts in United Kingdom without permisson from a husband?',
+     'options': ['1959', '1962', '1975', '1988'],
+     'correct_answer': '1975'}
+]
+
+# Question score and counting
+score = 0
+
+def display_question(question):
+    print(question['question'])
+    for i, option in enumerate(question['options'], 1):
+        print(f"{i}: {option}")
+
+def get_user_answer():
+    while True:
+        try:
+            user_input = int(input("Please enter the number for your answer: "))
+            if 1 <= user_input <= 4:
+                return user_input
+            else:
+                print("Please enter a number between 1 and 4.")
+        except ValueError:
+            print("Please enter a valid number option for your answer")
+
+def run_quiz():
+    global score
+    for question in questions:
+        display_question(question)
+        user_answer_index = get_user_answer() - 1
+        correct_answer_index = question['options'].index(question['correct_answer'])
+        if user_answer_index == correct_answer_index:
+            score += 1
+
+if __name__ == '__main__':
+    run_quiz()
+    print(f"Your final score is: {score}/{len(questions)}")
+
+

@@ -1,0 +1,60 @@
+import random
+
+# Quiz questions, options, and answers
+questions = [
+    {'question': 'What is the rarest M&M candy color?',
+     'options': ['Brown', 'Blue', 'Yellow', 'Green'],
+     'correct_answer': 'Brown'},
+    {'question': 'What is the collective noun for a group of pandas?',
+     'options': ['A Group', 'An embarrassment', 'A troup', 'A grove'],
+     'correct_answer': 'An embarrassment'},
+    {'question': 'From which country does Gouda cheese originate?',
+     'options': ['Netherlands', 'Norway', 'USA', 'Denmark'],
+     'correct_answer': 'Netherlands'},
+    {'question': 'Which Disney Princess talks to the most animals?',
+     'options': ['Jasmine', 'Ariel', 'Rapunzel', 'Snow White'],
+     'correct_answer': 'Snow White'},
+    {'question': 'How many colors are there in the rainbow?',
+     'options': ['Five', 'Seven', 'Ten', 'Eleven'],
+     'correct_answer': 'Seven'},
+    {'question': 'Which country invented ice cream?',
+     'options': ['Japan', 'Russia', 'China', 'Germany'],
+     'correct_answer': 'China'},
+    {'question': 'How many hearts does an octopus have?',
+     'options': ['One', 'Two', 'Three', 'Six'],
+     'correct_answer': 'Three'}
+]
+
+# Question score and counting
+score = 0
+
+def display_question(question):
+    print(question['question'])
+    for i, option in enumerate(question['options'], 1):
+        print(f"{i}: {option}")
+
+def get_user_answer():
+    while True:
+        try:
+            user_input = int(input("Please enter the number for your answer: "))
+            if 1 <= user_input <= 4:
+                return user_input
+            else:
+                print("Please enter a number between 1 and 4.")
+        except ValueError:
+            print("Please enter a valid number option for your answer")
+
+def run_quiz():
+    global score
+    for question in questions:
+        display_question(question)
+        user_answer_index = get_user_answer() - 1
+        correct_answer_index = question['options'].index(question['correct_answer'])
+        if user_answer_index == correct_answer_index:
+            score += 1
+
+if __name__ == '__main__':
+    run_quiz()
+    print(f"Your final score is: {score}/{len(questions)}")
+
+

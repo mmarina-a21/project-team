@@ -1,63 +1,14 @@
-<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yapatron</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="Images/logo.ico">
-</head>
-<body>
-    <header>
-        <nav id="main-nav">
-            <ul>
-                <div id="logo-container">
-                    <a href="index.html">
-                        <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
-                    </a>
-                </div>
-                <li><a href="index.html">Forums</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="communities.html">Communities</a></li>
-                <li><a href="authenticator.html">Log in / Sign up</a></li>
-                <li>
-                    <input type="search" id="search" placeholder="Search">
-                </li> 
-                <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
-                    <label class="theme-switch">
-                        <input type="checkbox" class="night-mode-switch" />
-                        <div class="slider round"></div>
-                    </label>
-                  </div>
-            </ul>
-        </nav>          
-    </header>
-    <main>
-        <section id="forum-section">
-            <button id="new-post">New Post</button>
-            <div id="threads">
-                <div id="latest-threads">
-                    <h2>Latest Threads</h2>
-                    <!-- Latest threads content will go here -->
-                </div>
-                <div id="popular-threads">
-                    <h2>Popular Threads</h2>
-                    <!-- Popular threads content will go here -->
-                </div>
-            </div>
-        </section>
-        <aside id="games-section">
-            <h2>Games</h2>
-            <div id="games-list">
-                <!-- Links or icons to games will go here -->
-            </div>
-        </aside>
-    </main>
-    
-    <footer>
-        <p>© 2024 Yapatron. All rights reserved.</p>
-    </footer>
-    <script src="nightmode.js"></script>
-</body>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport", content="width=device-width, initial-scale=1.0">
+        <title>Jumpy Chicken</title>
+        <link rel="stylesheet" href="jc.css">
+        <script src="jc.js"></script>
+    </head>
+    <body>
+        <div id="gameOverMessage" class="hidden">Final Score: <span id="finalScore"></span></div>
+        <canvas id="board"></canvas>
+    </body>
 </html>

@@ -1,0 +1,45 @@
+// Quiz questions, options, and correct answers
+const questions = [
+    { question: 'What is the largest continent, by land mass?', options: ['Asia', 'North America', 'South America', 'Africa'], correctAnswer: 'Asia' },
+    { question: 'What type of tree is pictured on the Lebanese flag?', options: ['Common Fig Tree', 'Green Cedar Tree', 'Weeping Fig', 'Red Frangipani'], correctAnswer: 'Green Cedar Tree' },
+    { question: 'In what year did the Ottoman Empire officially end?', options: ['1874', '1922', '1940', '1957'], correctAnswer: '1922' },
+    { question: 'At which Olympics did women’s boxing make its official Olympic debut?', options: ['Los Angeles 1984', 'Sydney 2000', 'Innsbruck 1976', 'London 2012'], correctAnswer: 'London 2012' },
+    { question: 'In Celsius, what is the melting point of gold?', options: ['100 °C', '544 °C', '901 °C', '1,064 °C'], correctAnswer: '1,064 °C' },
+    { question: 'Which former US government employee became a pioneer of the LGBTQ+ rights movement after being fired for being openly gay and which year was he fired?', options: ['Admiral George Dewey, 1980', 'Astronomer Frank Kameny, 1957', 'Diplomat Allen Dulles, 1969', 'Congressman George White, 2001'], correctAnswer: 'Astronomer Frank Kameny, 1957' },
+    { question: 'What year were women allowed to open bank accounts in United Kingdom without permission from a husband?', options: ['1959', '1962', '1975', '1988'], correctAnswer: '1975' }
+];
+
+let score = 0;
+
+function displayQuestion(question) {
+    alert(question.question);
+    question.options.forEach((option, index) => {
+        alert(`${index + 1}: ${option}`);
+    });
+}
+
+function getUserAnswer() {
+    while (true) {
+        const userInput = prompt("Please enter the number for your answer:");
+        const userChoice = parseInt(userInput, 10);
+        if (userChoice >= 1 && userChoice <= 4) {
+            return userChoice;
+        } else {
+            alert("Please enter a number between 1 and 4.");
+        }
+    }
+}
+
+function runQuiz() {
+    questions.forEach(question => {
+        displayQuestion(question);
+        const userAnswerIndex = getUserAnswer() - 1;
+        const correctAnswerIndex = question.options.indexOf(question.correctAnswer);
+        if (userAnswerIndex === correctAnswerIndex) {
+            score++;
+        }
+    });
+    alert(`Your final score is: ${score}/${questions.length}`);
+}
+
+runQuiz();

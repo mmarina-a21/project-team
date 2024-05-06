@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediterranean College Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+
+        input[type="text"], input[type="date"], input[type="email"], input[type="tel"],
+        input[type="number"], input[type="password"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+        }
+
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="loginSection">
+        <h2>Admin Login</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <div id="registrationSection">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <div class="input-group">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+            <div class="input-group">
+                <label for="birthDate">Birth Date:</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+            <div class="input-group">
+                <label for="program">School Program:</label>
+                <select id="program" name="program" required>
+                    <option value="">Select a program</option>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Networks and Security">Computer Science Networks and Security</option>
+                    <option value="Gaming">Computer Science Gaming</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="taxId">Taxes ID or Passport Number:</label>
+                <input type="text" id="taxId" name="taxId" required>
+            </div>
+            <div class="input-group">
+                <label for="citizenship">Citizenship Country:</label>
+                <input type="text" id="citizenship" name="citizenship" required>
+            </div>
+            <div class="input-group">
+                <label for="ielts">IELTS Level:</label>
+                <input type="number" id="ielts" name="ielts" min="0" max="9" step="0.5" required>
+            </div>
+            <div class="input-group">
+                <label for="telephone">Telephone Number:</label>
+                <input type="tel" id="telephone" name="telephone" required>
+            </div>
+            <div class="input-group">
+                <label for="streetName">Street Name:</label>
+                <input type="text" id="streetName" name="streetName" required>
+            </div>
+            <div class="input-group">
+                <label for="zipCode">Zip Code:</label>
+                <input type="text" id="zipCode" name="zipCode" required>
+            </div>
+            <div class="input-group">
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" required>
+            </div>
+            <div class="input-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div id="adminSection" style="display: none;">
+        <h2>Edit Registrations</h2>
+        <!-- Admin form for editing the data -->
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === "Admin" && password === "AdminPassword") {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminSection').style.display = 'block';
+            } else {
+                alert('Invalid credentials');
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(event){
+            event.preventDefault();
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                birthDate: document.getElementById('birthDate').value,
+                program: document.getElementById('program').value,
+                taxId: document.getElementById('taxId').value,
+                citizenship: document.getElementById('citizenship').value,
+                ielts: document.getElementById('ielts').value,
+                telephone: document.getElementById('telephone').value,
+                streetName: document.getElementById('streetName').value,
+                zipCode: document.getElementById('zipCode').value,
+                country: document.getElementById('country').value,
+                email: document.getElementById('email').value
+            };
+            console.log("Form Data Submitted: ", formData);
+            alert('Registration Successful!');
+        });
+
+        function logout() {
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+        }
+
+        // Initialize the page
+        window.onload = function() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('registrationSection').style.display = 'block';
+        };
+    </script>
+</body>
+</html>

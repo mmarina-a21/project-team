@@ -1,0 +1,196 @@
+/* Memory game container */
+.memory-game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Grid layout for the cards */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 10px;
+}
+
+/* Styling for each card */
+.card {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    perspective: 1000px;
+}
+
+/* Inner part of the card for flipping effect */
+.card .card-inner {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+/* Flipping effect for the card */
+.card.flip .card-inner {
+    transform: rotateY(180deg);
+}
+
+/* Front and back faces of the card */
+.card .card-front, .card .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+/* Styling for the front face of the card */
+.card-front {
+    background-color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for the back face of the card */
+.card .card-back {
+    background-color: #ccc;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateY(180deg);
+}
+
+/* Landing page styles */
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* Title styling */
+.landing-page h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Start button styling */
+.start-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Popup container styling */
+.popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Popup styling */
+.popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.popup h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.popup button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: #0056b3;
+}
+
+/* Hide/show class */
+.hidden {
+    display: none;
+}
+
+/* Memory game container */
+.memory-game {
+    position: relative;
+}
+
+/* Restart button styling */
+#restart-btn {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Title styling */
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Congratulations message styling */
+.congrats-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    text-align: center;
+    z-index: 999;
+}
+
+/* Background container styling */
+.bg {
+    font-family: sans-serif;
+    text-align: center;
+    background-color: #d0ebff;
+}
+

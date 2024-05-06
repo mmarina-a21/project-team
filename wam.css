@@ -1,0 +1,68 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+    background-image: url("https://media3.giphy.com/media/l396BoOTIFem9xqQU/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+#board
+{
+width: 640px;
+height: 640px;
+
+
+margin: 0 auto;
+margin-bottom: 10px;
+display: flex;
+flex-wrap: wrap;
+
+background: url("https://i.ebayimg.com/images/g/SNgAAOSwjh1hr97F/s-l1600.jpg");
+background-size: cover;
+border: 3px solid white;
+border-radius: 25px;
+justify-content: space-between; /* Distribute items evenly */
+    align-items: space-between;
+}
+
+
+#board div {
+    width: 180px;
+    height: 180px;
+    background-image: url(https://cdn0.iconfinder.com/data/icons/photo-camera-ui/512/bat-batman-vampire-circle-border-512.png);
+    background-size: 100% 100%;
+   background-repeat: no-repeat;
+   background-position: center;
+   
+}
+
+#board div img {
+    width: 180px;
+    height: 180px;
+
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+#startButton {
+    position: absolute;
+    left: 250px;  
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    padding: 15px 30px;
+    background-color: grey;
+}
+
+#timer {
+    position: absolute;
+    left: 340px;
+    top: calc(50% + 70px); 
+    transform: translateX(-50%);
+    font-size: 20px;
+    color: 	#2F4BDA;
+}

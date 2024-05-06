@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logolink-up</title>
+    <link rel="stylesheet" href="css/memory.css"><!-- Linking external stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/png" href="Images/logo.ico">
+</head>
+<body>
+    <div class="bg"><!-- Background container -->
+        <header>
+            <nav id="main-nav">
+                <ul>
+                    <div id="logo-container">
+                        <a href="index.html">
+                            <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
+                        </a>
+                    </div>
+                    <li><a href="index.html">Forums</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="communities.html">Communities</a></li>
+                    <li><a href="authenticator.html">Log in / Sign up</a></li>
+                    <li>
+                        <input type="search" id="search" placeholder="Search">
+                    </li> 
+                    <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
+                        <label class="theme-switch">
+                            <input type="checkbox" class="night-mode-switch" />
+                            <div class="slider round"></div>
+                        </label>
+                      </div>
+                </ul>
+            </nav>          
+        </header> 
+        <script src="js/tictactoe.js"></script>
+    <h1> LogoLink-Up </h1>
+    <!-- Memory game container -->
+    <div class="memory-game">
+        <div class="grid">
+            <!-- Cards will be generated here -->
+        </div>
+        <!-- Restart button -->
+        <button id="restart-btn">Restart</button>
+    </div>
+    <!-- JavaScript for the memory game -->
+    <script src="js/memory.js"></script>
+    <footer>
+        <p>© 2024 Yapatron. All rights reserved.</p>
+    </footer>
+    <script src="js/nightmode.js"></script>
+</body>
+</html>

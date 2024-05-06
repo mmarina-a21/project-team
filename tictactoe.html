@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="css/tictactoe.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/tictactoe.js"></script>
+    <link rel="icon" type="image/png" href="Images/logo.ico">
+</head>
+<body>
+    <div class="bg">
+        <header>
+            <nav id="main-nav">
+                <ul>
+                    <div id="logo-container">
+                        <a href="index.html">
+                            <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
+                        </a>
+                    </div>
+                    <li><a href="index.html">Forums</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="communities.html">Communities</a></li>
+                    <li><a href="authenticator.html">Log in / Sign up</a></li>
+                    <li>
+                        <input type="search" id="search" placeholder="Search">
+                    </li> 
+                    <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
+                        <label class="theme-switch">
+                            <input type="checkbox" class="night-mode-switch" />
+                            <div class="slider round"></div>
+                        </label>
+                      </div>
+                </ul>
+            </nav>          
+        </header>
+    <script src="js/tictactoe.js"></script>
+    <br>
+    <h1>Tic Tac Toe</h1>
+    <div><button id="restartButton">Restart</button></div>
+    <hr>
+    <div id="result" style="display: none;"></div>
+<!--making a 3x3 board-->
+    <br>
+    <div id="board"></div>
+</div>
+<footer>
+    <p>© 2024 Yapatron. All rights reserved.</p>
+</footer>
+<script src="js/nightmode.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log in / Sign up - Yapatron</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="Images/logo.ico">
 </head>
 <body>
@@ -36,17 +36,17 @@
         <div class="modal-content">
             <div class="auth-form" id="login-form">
                 <h2>Login</h2>
-                <input type="email" placeholder="Email" required>
+                <input type="text" placeholder="Username" required>  <!-- Changed from type="email" to type="text" for username -->
                 <input type="password" placeholder="Password" required>
-                <button type="submit" onclick="login()">Login</button>
+                <button type="button" onclick="login()">Login</button>
                 <p class="switch-form">Not registered? <a href="#" onclick="switchForm('signup')">Create an account</a></p>
-            </div>
+            </div>            
             <div class="auth-form" id="signup-form" style="display:none;">
                 <h2>Signup</h2>
                 <input type="text" placeholder="Username" required>
                 <input type="email" placeholder="Email" required>
                 <input type="password" placeholder="Password" required>
-                <button type="submit" onclick="signup()">Signup</button>
+                <button type="button" onclick="signup()">Signup</button>
                 <p class="switch-form">Already registered? <a href="#" onclick="switchForm('login')">Sign in</a></p>
             </div>
         </div>
@@ -54,7 +54,7 @@
     <footer>
         <p>© 2024 Yapatron. All rights reserved.</p>
     </footer>
-    <script src="nightmode.js"></script>
-    <script src="authenticator.js"></script>
+    <script src="js/nightmode.js"></script>
+    <script src="js/authenticator.js"></script>
 </body>
 </html>

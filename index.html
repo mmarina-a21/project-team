@@ -1,11 +1,10 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yapatron</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/png" href="Images/logo.ico">
 </head>
 <body>
@@ -34,8 +33,7 @@
         </nav>          
     </header>
     <main>
-        <section id="forum-section">
-            <button id="new-post">New Post</button>
+        <div id="forum-section">
             <div id="threads">
                 <div id="latest-threads">
                     <h2>Latest Threads</h2>
@@ -45,19 +43,44 @@
                     <h2>Popular Threads</h2>
                     <!-- Popular threads content will go here -->
                 </div>
+                <button id="new-post">New Post</button>
             </div>
+            <aside id="games-section">
+                <h2>Games</h2>
+                <div id="games-list">
+                  <a href="tictactoe.html">
+                    <img src="Images\tictactoe.png" alt="Tic-Tac-Toe">
+                    <span class="hyperlink-icon">Tic-Tac-Toe</span>
+                  </a>
+                  <a href="memory.html">
+                    <img src="Images/logolink-up.png" alt="Logolink-up">
+                    <span class="hyperlink-icon">Logolink-up</span>
+                  </a>
+                  <a href="wam.html">
+                    <img src="Images/Joker.png" alt="Whack-a-Mole">
+                    <span class="hyperlink-icon">Whack a Mole</span>
+                  </a>
+                  <a href="jc.html">
+                    <img src="Images/bird.png" alt="Jumpy Chicken">
+                    <span class="hyperlink-icon">Jumpy Chicken</span>
+                  </a>
+                  <a href="quiz1.html">
+                    <img src="Images/quiz.png" alt="Quiz 1">
+                    <span class="hyperlink-icon">Quiz Game 1</span>
+                  </a>
+                  <a href="quiz2.html">
+                    <img src="Images/quiz.png" alt="Quiz 2">
+                    <span class="hyperlink-icon">Quiz Game 2</span>
+                  </a>
+                </div>
+              </aside>
+              
+        </div>
         </section>
-        <aside id="games-section">
-            <h2>Games</h2>
-            <div id="games-list">
-                <!-- Links or icons to games will go here -->
-            </div>
-        </aside>
     </main>
-    
     <footer>
         <p>© 2024 Yapatron. All rights reserved.</p>
     </footer>
-    <script src="nightmode.js"></script>
+    <script src="js/nightmode.js"></script>
 </body>
 </html>

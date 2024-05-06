@@ -1,0 +1,27 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-image: url("https://i.gifer.com/TRkO.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    margin: 0; 
+    overflow: hidden; 
+}
+
+#board {
+    background-image: url("https://images.wallpapersden.com/image/download/pixelart-night-landscape_bGtsZ22UmZqaraWkpJRmaWllrWdua2U.jpg");
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center bottom; 
+    height: 110vh; 
+}
+
+#gameOverMessage {
+    position: absolute;
+    top: 50%;
+    left: 250px;
+    transform: translateY(-50%);
+    color: whitesmoke;
+    font-size: 24px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}

@@ -1,56 +1,192 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Profile Page</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="Images/logo.ico">
-</head>
-<body>
-  <header>
-    <nav id="main-nav">
-        <ul>
-            <div id="logo-container">
-                <a href="index.html">
-                    <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
-                </a>
-            </div>
-            <li><a href="index.html">Forums</a></li>
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="communities.html">Communities</a></li>
-            <li><a href="authenticator.html">Log in / Sign up</a></li>
-            <li>
-                <input type="search" id="search" placeholder="Search">
-            </li> 
-            <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
-                <label class="theme-switch">
-                    <input type="checkbox" class="night-mode-switch" />
-                    <div class="slider round"></div>
-                </label>
-              </div>
-        </ul>
-    </nav>          
-</header>
-<main>
-    <div class="profile-container">
-      <h1>Profile</h1>
-      <div class="profile-picture-container">
-          <form id="uploadForm" enctype="multipart/form-data">
-              <input type="file" id="fileInput" name="profilePic" accept="image/*" onchange="uploadProfilePicture()" style="display: none;">
-              <button type="button" onclick="document.getElementById('fileInput').click();">Upload Picture</button>
-          </form>
-          <img id="profile-picture" src="/uploads/default_profile_picture.png" alt="Profile Picture">
-      </div>
-      <div class="profile-details">
-          <p><strong>Username:</strong> <span id="profile-username"></span></p>
-          <p><strong>Email:</strong> <span id="profile-email"></span></p>
-      </div>
-  </div>
-</main>
-<footer>
-    <p>© 2024 Yapatron. All rights reserved.</p>
-</footer>
-<script src="js/profile.js"></script> 
-<script src="js/nightmode.js"></script>
-</body>
-</html>
+function loadProfilePicture(event) {
+  var reader = new FileReader();
+  reader.onload = function() {
+    var output = document.getElementById('profile-picture');
+    output.src = reader.result;
+  };
+  reader.readAsDataURL(event.target.files[0]);
+}
+
+function toggleAndUpdateBio() {
+    let bioTextElement = document.getElementById('profile-bio');
+    let bioEditElement = document.getElementById('bio-edit');
+    let bioBtn = document.getElementById('update-bio-btn');
+
+    // Check if we're currently in editing mode
+    if (bioEditElement.style.display === 'none' || bioEditElement.style.display === '') {
+        bioEditElement.style.display = 'block';
+        bioBtn.style.display = 'block'; // Show the update button
+        bioTextElement.style.display = 'none'; // Hide the static bio text
+    } else {
+        let bioText = bioEditElement.value; // Get edited bio text
+        let username = JSON.parse(sessionStorage.getItem('user')).username;
+
+        fetch('/update-bio', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, bio: bioText })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                bioTextElement.textContent = bioText; // Update the bio text on success
+                bioTextElement = document.getElementById('profile-bio');
+                
+                // Correct session storage update syntax
+                let updatedUser = JSON.parse(sessionStorage.getItem('user'));
+                updatedUser.bio = bioText;
+                sessionStorage.setItem('user', JSON.stringify(updatedUser)); // Update session storage
+                
+                bioTextElement.style.display = 'block'; // Show the updated bio text
+                bioEditElement.style.display = 'none'; // Hide the edit text area
+            } else {
+                alert('Failed to update bio: ' + data.message);
+                // Leave editing mode active if update fails
+                bioEditElement.style.display = 'block';
+                bioBtn.style.display = 'block';
+            }
+        })        
+        .catch(error => {
+            console.error('Error updating bio:', error);
+            alert('Error updating bio: ' + error.message);
+            // Leave editing mode active if there's an error
+            bioEditElement.style.display = 'block';
+            bioBtn.style.display = 'block';
+        });
+    }
+}
+
+function uploadProfilePicture() {
+  var formData = new FormData();
+  formData.append('profilePic', document.getElementById('fileInput').files[0]);
+  formData.append('username', JSON.parse(sessionStorage.getItem('user')).username); // Corrected data retrieval from sessionStorage
+
+  fetch('/upload-profile-picture', {
+      method: 'POST',
+      body: formData
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok: ' + response.statusText);
+      }
+      return response.json();
+  })
+  .then(data => {
+      if (data.success) {
+          alert('Profile picture uploaded successfully!');
+          document.getElementById('profile-picture').src = data.url;
+      } else {
+          alert('Failed to upload profile picture: ' + data.message);
+      }
+  })
+  .catch(error => {
+      console.error('Error uploading profile picture:', error);
+      alert('Error uploading profile picture: ' + error.message);
+  });
+}
+
+function createPost() {
+    const title = document.getElementById('post-title').value;
+    const content = document.getElementById('post-content').value;
+    const username = JSON.parse(sessionStorage.getItem('user')).username;
+
+    if (!title.trim() || !content.trim()) {
+        alert("Please enter both a title and content for the post.");
+        return;
+    }
+
+    fetch('/create-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, title, content })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Post created successfully!');
+            document.getElementById('post-title').value = ''; // Clear the title input
+            document.getElementById('post-content').value = ''; // Clear the textarea
+            const user = JSON.parse(sessionStorage.getItem('user'));
+            user.posts = user.posts || []; // Ensure there is an array to push to
+            user.posts.push({ Title: title, Content: content }); // Assume this structure matches your backend
+            sessionStorage.setItem('user', JSON.stringify(user));
+            fetchAndDisplayPosts();
+        } else {
+            alert('Failed to create post: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error creating post:', error);
+        alert('Error creating post: ' + error.message);
+    });
+}
+
+function fetchAndDisplayPosts() {
+    const username = JSON.parse(sessionStorage.getItem('user')).username;
+    fetch(`/get-posts?username=${encodeURIComponent(username)}`)
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            displayPosts(data.posts);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching posts:', error);
+    });
+}
+
+function displayPosts(posts) {
+    const postsContainer = document.getElementById('posts-list');
+    postsContainer.innerHTML = ''; // Clear existing posts
+
+    posts.forEach(post => {
+        const postElement = document.createElement('div');
+        postElement.className = 'post';
+
+        // Create elements for the title and content
+        const titleElement = document.createElement('h3');
+        titleElement.textContent = post.Title;  // Assuming the title property is 'Title'
+
+        const contentElement = document.createElement('p');
+        contentElement.textContent = post.Content;  // Assuming the content property is 'Content'
+
+        // Append title and content to the post element
+        postElement.appendChild(titleElement);
+        postElement.appendChild(contentElement);
+
+        // Append the post element to the container
+        postsContainer.appendChild(postElement);
+    });
+
+    if(posts.length === 0) {
+        postsContainer.innerHTML = '<p>No posts to display.</p>'; // Display message if no posts
+    }
+}
+
+window.onload = function() {
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    if (userData && userData.username) {
+        displayPosts(userData.posts || []); // Display posts from session storage
+        // Populate user data from sessionStorage
+        document.getElementById('profile-username').textContent = userData.username;
+        document.getElementById('profile-email').textContent = userData.email;
+        document.getElementById('profile-bio').textContent = userData.bio || 'No bio set';
+        displayPosts(userData.posts);
+        // Fetch and update profile picture
+        fetch(`/get-profile-picture?username=${encodeURIComponent(userData.username)}`)
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  document.getElementById('profile-picture').src = data.url;
+              } else {
+                  console.error('Failed to load profile picture:', data.message);
+                  document.getElementById('profile-picture').src = '/uploads/default_profile_picture.png';
+              }
+          })
+          .catch(error => {
+              console.error('Error fetching profile picture:', error);
+          });
+    } else {
+        window.location.href = 'authenticator.html'; // Redirect if no user data found
+    }
+}

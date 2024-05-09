@@ -50,7 +50,7 @@ function login() {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            sessionStorage.setItem('user', JSON.stringify({ username: data.user, email: data.email }));
+            sessionStorage.setItem('user', JSON.stringify({ username: data.user, email: data.email, bio: data.bio, posts: data.posts }));
             window.location.href = 'profile.html';
         } else {
             alert('Invalid credentials!');

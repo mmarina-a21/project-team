@@ -72,10 +72,11 @@ input[type="search"]:focus {
 
 /* Structure */
 main {
-    flex: 1;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
+    flex: 1 1 auto; /* grow and shrink as needed, basis auto */
+    width: 100%; /* Use all horizontal space */
+    padding: 20px; /* Keep padding but ensure it does not push contents */
+    box-sizing: border-box; /* Include padding in width calculations */
 }
 
 footer {
@@ -99,6 +100,65 @@ footer {
     z-index: 1;
 }
 
+/* The Modal (background) */
+#postModal {
+    display: none;  /* Hidden by default */
+    position: fixed;  /* Stay in place */
+    z-index: 1000;  /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;  /* Full width */
+    height: 100%;  /* Full height */
+    overflow: auto;  /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4);  /* Black with opacity */
+}
+
+#postModal .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;  /* Lower the margin for better centering */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;  /* Increase the width for better readability */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1), 0 6px 20px rgba(0,0,0,0.19);  /* Enhance the shadow for depth */
+}
+
+#postModal input[type="text"],
+#postModal textarea {
+    width: 100%;  /* Full width of the modal content */
+    padding: 10px;  /* Adequate padding for better text input */
+    margin-top: 8px;  /* Margin on top for spacing */
+    border: 1px solid #ccc;  /* Defined border */
+    box-sizing: border-box;  /* Border-box for better box model handling */
+}
+
+#postModal button {
+    width: auto;  /* Auto width based on content */
+    padding: 10px 20px;  /* Comfortable padding */
+    margin-top: 20px;  /* Space above the button */
+    background-color: #007bff;  /* A nice blue */
+    color: white;  /* Text color */
+    border: none;
+    cursor: pointer;
+    display: block;  /* Block display to take the full line */
+    margin-left: auto;  /* Align to the right */
+    margin-right: 0;  /* Flush with the right side */
+}
+
+/* The Close Button */
+#postModal .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+#postModal .close:hover,
+#postModal .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 /* Buttons */
 button {
     cursor: pointer;
@@ -117,31 +177,45 @@ button:hover {
 }
 
 #forum-section {
-    flex-grow: 1;
-    margin-right: 20px;
-    flex-direction: row;
+    display: flex;
+    flex-grow: 1; /* Allow this section to take up all available space */
+    flex-direction: row; /* Layout children horizontally */
+}
+
+#posts-container {
+    max-height: 400px;  /* Adjust the height as needed */
+    overflow-y: auto;   /* Enables vertical scrolling */
+    border: 1px solid #ccc; /* Optional: adds a border around the posts container */
+    padding: 10px;
+}
+
+.post {
+    border-bottom: 1px solid #ccc; /* Adds a line between posts */
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 #new-post {
-    order: 3;
+    margin-bottom: 10px;
 }
 
-#latest-threads, #popular-threads {
+#threads {
+    flex: 3; /* Allows 'threads' to take more space than 'games' */
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px; /* Space between threads and games */
+}
+
+#latest-threads {
+    max-width: 100%;
     border: 1px solid #ccc;
     padding: 10px;
     margin-bottom: 20px;
 }
+
 #forum-section {
     display: flex; /* Apply flexbox to the forum section */
     flex-grow: 1; /* Forum section will grow to fill the space */
-}
-
-#threads {
-    display: flex; /* Make the threads container a flex container */
-    flex-direction: column; /* Stack the threads vertically */
-    flex-grow: 1; /* Threads will take up the remaining space */
-    margin-right: 520px; /* Add space between threads and games section */
-    max-width: 800px;
 }
 
 #games-section {
@@ -149,7 +223,9 @@ button:hover {
     color: rgb(0, 0, 0);
     padding: 20px;
     text-align: center;
+    flex: 1; /* Lesser space compared to threads */
     border: 1px solid #ccc;
+    max-width: 25%;
   }
   
   #games-list {
@@ -177,7 +253,6 @@ button:hover {
     color: #000000;
   }
   
-  
   #games-list img:hover {
     transform: scale(1.1);
   }
@@ -186,6 +261,29 @@ button:hover {
     display: block;
     margin-top: 5px;
   }  
+
+/* General styles for the scrollbar */
+#posts-container::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;  /* Ensures no background color for the scrollbar */
+}
+
+/* Styles for the scrollbar track */
+#posts-container::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 10px;  /* Rounded corners for the track */
+}
+
+/* Styles for the scrollbar thumb */
+#posts-container::-webkit-scrollbar-thumb {
+    background-color: #888;  /* Dark grey color for the thumb */
+    border-radius: 10px;  /* Rounded corners for the thumb */
+}
+
+/* Styles to remove the scrollbar arrows */
+#posts-container::-webkit-scrollbar-button {
+    display: none;  /* Hides the scrollbar arrows */
+}
 
 /* Night mode styles */
 body.night-mode {
@@ -332,88 +430,6 @@ body.night-mode .theme-switch .slider {
 
 #signup-form {
     display: none; /* Hide the signup form initially */
-}
-
-/* Profile Page Styles */
-.profile-container {
-    max-width: 800px; /* Set a max-width for the profile container */
-    margin: 2rem auto; /* Center the profile container */
-    padding: 1rem;
-    background-color: #f9f9f9; /* A light grey background */
-    border-radius: 10px; /* Rounded corners for the container */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    text-align: center; /* Center the text */
-}
-
-h1 {
-    color: #333; /* Dark grey color for the heading */
-    margin-bottom: 1.5rem; /* Space below the heading */
-}
-
-.profile-picture-container {
-    margin-bottom: 1rem; /* Space below the picture container */
-}
-
-#profile-picture {
-    width: 200px; /* Fixed width for the profile picture */
-    height: 200px; /* Fixed height for the profile picture */
-    border-radius: 50%; /* Circular profile pictures */
-    object-fit: cover; /* Cover fit for images */
-    border: 3px solid #007bff; /* Border to make the picture stand out */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow around the picture */
-}
-
-.profile-details {
-    text-align: left; /* Left-align the text in profile details */
-    margin-top: 1rem; /* Space above profile details */
-}
-
-.profile-details p {
-    margin: 0.5rem 0; /* Vertical spacing between details */
-    padding: 0 1rem; /* Padding on the sides */
-}
-
-/* Apply a responsive grid layout on larger screens */
-@media (min-width: 768px) {
-    .profile-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center align items */
-        padding: 2rem;
-      }
-      
-      .profile-picture-container {
-        position: relative;
-        margin-bottom: 2rem;
-      }      
-
-      .profile-details {
-        background: #f2f2f2; /* Light background for the details area */
-        padding: 1rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        width: 100%; /* Full width or adjust as needed */
-        max-width: 400px; /* Maximum width for larger screens */
-        box-sizing: border-box;
-      }
-}
-
-#profile-picture {
-    width: 150px; /* Set your desired size */
-    height: 150px;
-    border-radius: 50%; /* Circular photo */
-    object-fit: cover; /* Ensure the image covers the area */
-    border: 3px solid #007bff; /* Border color can change in night mode if needed */
-}
-
-/* Night Mode Adjustments */
-body.night-mode .profile-details {
-    background: #34495e;
-    color: #ecf0f1; /* Adjust text color for better visibility */
-  }
-  
-  body.night-mode #profile-picture {
-    border-color: #ecf0f1;
 }
 
 body.night-mode #games-section {

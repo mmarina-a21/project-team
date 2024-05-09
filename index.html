@@ -18,7 +18,6 @@
                 </div>
                 <li><a href="index.html">Forums</a></li>
                 <li><a href="profile.html">Profile</a></li>
-                <li><a href="communities.html">Communities</a></li>
                 <li><a href="authenticator.html">Log in / Sign up</a></li>
                 <li>
                     <input type="search" id="search" placeholder="Search">
@@ -37,13 +36,21 @@
             <div id="threads">
                 <div id="latest-threads">
                     <h2>Latest Threads</h2>
-                    <!-- Latest threads content will go here -->
-                </div>
-                <div id="popular-threads">
-                    <h2>Popular Threads</h2>
-                    <!-- Popular threads content will go here -->
-                </div>
-                <button id="new-post">New Post</button>
+                    <div id="posts-container">
+                      <!-- Latest threads content will go here -->
+                    </div>
+                 </div>
+                 <button id="new-post-btn">New Post</button>
+                   <!-- Modal for Creating Posts -->
+                    <div id="postModal" class="modal">
+                       <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Create a New Post</h2>
+                        <input type="text" id="post-title" placeholder="Title of your post">
+                        <textarea id="post-content" placeholder="What's happening?"></textarea>
+                        <button onclick="createPost()">Post</button>
+                       </div>
+                    </div>              
             </div>
             <aside id="games-section">
                 <h2>Games</h2>
@@ -82,5 +89,6 @@
         <p>© 2024 Yapatron. All rights reserved.</p>
     </footer>
     <script src="js/nightmode.js"></script>
+    <script src="js/posts.js"></script>
 </body>
 </html>

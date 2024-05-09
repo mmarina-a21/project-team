@@ -3,53 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile Page</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/profile.css">
   <link rel="icon" type="image/png" href="Images/logo.ico">
 </head>
 <body>
   <header>
     <nav id="main-nav">
-      <ul>  
-          <div id="logo-container">
-              <a href="index.html">
-                  <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
-              </a>
-          </div>
-          <li><a href="index.html">Forums</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="communities.html">Communities</a></li>
-          <li><a href="authenticator.html">Log in / Sign up</a></li>
-          <li>
-              <input type="search" id="search" placeholder="Search">
-          </li> 
-          <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
-              <label class="theme-switch">
-                  <input type="checkbox" class="night-mode-switch" />
-                  <div class="slider round"></div>
-              </label>
+        <ul>
+            <div id="logo-container">
+                <a href="index.html">
+                    <img src="Images/logo.png" alt="Yapatron Logo" id="logo">
+                </a>
             </div>
-      </ul>
-  </nav>                 
+            <li><a href="index.html">Forums</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="authenticator.html">Log in / Sign up</a></li>
+            <li>
+                <input type="search" id="search" placeholder="Search">
+            </li> 
+            <div id="theme-switch-wrapper-main" class="theme-switch-wrapper">
+                <label class="theme-switch">
+                    <input type="checkbox" class="night-mode-switch" />
+                    <div class="slider round"></div>
+                </label>
+              </div>
+        </ul>
+    </nav>          
 </header>
-  <main>
+<main>
     <div class="profile-container">
       <h1>Profile</h1>
       <div class="profile-picture-container">
-        <img src="path_to_default_profile_picture.jpg" alt="Profile Picture" id="profile-picture">
-        <button onclick="document.getElementById('profile-picture-input').click()">Change Picture</button>
-        <input type="file" id="profile-picture-input" style="display: none;" onchange="loadProfilePicture(event)">
+          <form id="uploadForm" enctype="multipart/form-data">
+              <input type="file" id="fileInput" name="profilePic" accept="image/*" onchange="uploadProfilePicture()" style="display: none;">
+              <button type="button" onclick="document.getElementById('fileInput').click();">Upload Picture</button>
+          </form>
+          <img id="profile-picture" src="/uploads/default_profile_picture.png" alt="Profile Picture">
       </div>
       <div class="profile-details">
-        <p><strong>Username:</strong> <span id="profile-username">YourUsername</span></p>
-        <p><strong>Email:</strong> <span id="profile-email">youremail@example.com</span></p>
-      </div>
-    </div>
-  </main>
-  <footer>
+           <p><strong>Username:</strong> <span id="profile-username"></span></p>
+           <p><strong>Email:</strong> <span id="profile-email"></span></p>
+           <p><strong>Bio:</strong> <span id="profile-bio"></span></p>
+           <textarea id="bio-edit" style="display:none;" placeholder="Enter your bio here..."></textarea>
+           <button id="update-bio-btn" onclick="toggleAndUpdateBio()">Update Bio</button>
+      </div>     
+  </div>
+  <div class="post-container">
+    <input type="text" id="post-title" placeholder="Title of your post" />
+    <textarea id="post-content" placeholder="What's happening?"></textarea>    
+    <button id="post-btn" onclick="createPost()">Post</button>
+    <div class="posts-container">
+        <h2>My Posts</h2>
+        <div id="posts-list">
+            <!-- Posts will be dynamically inserted here -->
+        </div>
+    </div>    
+  </div> 
+</main>
+<footer>
     <p>© 2024 Yapatron. All rights reserved.</p>
 </footer>
-
-  <script src="profile.js"></script> 
-  <script src="nightmode.js"></script>
+<script src="js/profile.js"></script> 
+<script src="js/nightmode.js"></script>
 </body>
 </html>

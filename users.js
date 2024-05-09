@@ -69,15 +69,29 @@ async function createUser(username, email, password) {
 async function login(username, password) {
     try {
         const pool = await sql.connect(config);
-        const result = await pool.request()
+        // First, get the user and their profile
+        const userResult = await pool.request()
             .input('Username', sql.VarChar, username)
-            .query('SELECT Username, PasswordHash, Email FROM Users WHERE Username = @Username');
+            .query(`
+                SELECT u.Username, u.PasswordHash, u.Email, p.Bio
+                FROM Users u
+                JOIN Profile p ON u.Username = p.Username
+                WHERE u.Username = @Username
+            `);
 
-        if (result.recordset.length > 0) {
-            const user = result.recordset[0];
+        if (userResult.recordset.length > 0) {
+            const user = userResult.recordset[0];
             const match = await bcrypt.compare(password, user.PasswordHash);
+
             if (match) {
-                return { success: true, username: user.Username, email: user.Email };
+                // Fetch posts
+                const postsResult = await pool.request()
+                    .input('Username', sql.VarChar, username)
+                    .query('SELECT Title, Content FROM Posts WHERE Username = @Username ORDER BY PostedAt DESC');
+                
+                const posts = postsResult.recordset;
+
+                return { success: true, username: user.Username, email: user.Email, bio: user.Bio, posts: posts };
             } else {
                 return { success: false, message: "Invalid credentials" };
             }

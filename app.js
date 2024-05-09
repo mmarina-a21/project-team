@@ -42,10 +42,13 @@ app.get('/', function(req, res) {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
+    console.log('Attempting login for:', username); // Log the attempt to see if the endpoint is hit
     try {
         const result = await login(username, password);
+        console.log('Login result:', result); // Log the result of the login function including posts
         if (result.success) {
-            res.send({ success: true, message: 'Logged in successfully', user: result.username, email: result.email });
+            console.log('User logged in:', { username: result.username, email: result.email, bio: result.bio, posts: result.posts });
+            res.send({ success: true, message: 'Logged in successfully', user: result.username, email: result.email, bio: result.bio, posts: result.posts });
         } else {
             res.status(401).send({ success: false, message: result.message });
         }
@@ -72,6 +75,71 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+});
+
+app.post('/update-bio', async (req, res) => {
+    const { username, bio } = req.body;
+    try {
+        const pool = await sql.connect(config);
+        await pool.request()
+            .input('Username', sql.VarChar, username)
+            .input('Bio', sql.VarChar, bio)
+            .query('UPDATE Profile SET Bio = @Bio WHERE Username = @Username');
+
+        res.json({ success: true, message: 'Bio updated successfully' });
+    } catch (error) {
+        console.error('Error updating bio:', error);
+        res.status(500).send({ success: false, message: 'Failed to update bio' });
+    }
+});
+
+app.post('/create-post', async (req, res) => {
+    const { username, title, content } = req.body;
+    try {
+        const pool = await sql.connect(config);
+        await pool.request()
+            .input('Username', sql.VarChar, username)
+            .input('Title', sql.VarChar, title) // Make sure to handle title
+            .input('Content', sql.VarChar, content)
+            .query('INSERT INTO Posts (Username, Title, Content, PostedAt) VALUES (@Username, @Title, @Content, GETDATE())');
+
+        res.json({ success: true, message: 'Post created successfully' });
+    } catch (error) {
+        console.error('Error creating post:', error);
+        res.status(500).send({ success: false, message: 'Failed to create post' });
+    }
+});
+
+app.get('/get-posts', async (req, res) => {
+    const username = req.query.username;  // Username passed as a query parameter
+    if (!username) {
+        return res.status(400).json({ success: false, message: 'Username is required' });
+    }
+
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .input('Username', sql.VarChar, username)
+            .query('SELECT * FROM Posts WHERE Username = @Username ORDER BY PostedAt DESC'); // Fetch posts by the user, newest first
+
+        res.json({ success: true, posts: result.recordset });
+    } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
+});
+
+app.get('/get-all-posts', async (req, res) => {
+    try {
+        const pool = await sql.connect(config);
+        const result = await pool.request()
+            .query('SELECT * FROM Posts ORDER BY PostedAt DESC'); // Fetch all posts ordered by date
+
+        res.json({ success: true, posts: result.recordset });
+    } catch (error) {
+        console.error('Error fetching all posts:', error);
+        res.status(500).send({ success: false, message: 'Server error during fetching all posts' });
     }
 });
 
